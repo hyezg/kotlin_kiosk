@@ -10,20 +10,27 @@ fun main() {
                 println("0~3까지 입력가능합니다.")
                 main()
             }
+
             val hamN = Ham()
             val pizN = Piz()
+            val chickN = Chicken()
 
-            println("====")
-            /*if(num == 1){
-                hamN.select()
-            }*/
+
             when (num) {
-                1 -> hamN.select()
+                1 -> {
+                    hamN.orr()
+                    hamN.select()
+                }
 
-                2 -> pizN.select()
+                2 -> {
+                    pizN.orr()
+                    pizN.select()
+                }
 
-                3 -> hamN.select()
-                //잠시만 ham으로
+                3 -> {
+                    chickN.orr()
+                    chickN.select()
+                }
 
                 0 -> {
                     println("종료 합니다.")
@@ -68,7 +75,8 @@ open class Food {
     }
 }
 open class Ham : Food() {
-    init {
+
+    fun orr() {
         println("===햄버거===")
         println("1.${BurgerA()}")
         println("2.${BurgerB()}")
@@ -76,6 +84,7 @@ open class Ham : Food() {
         println("가장 기본은 ${hambuger()}")
         println("0. 뒤로가기")
     }
+
     fun select(){
         println("셀렉트입니다. 번호를 고르세요")
         ordermenu()
@@ -112,13 +121,14 @@ open class Piz : Food() {
     var price = 0
     var material = ""*/
 
-    init {
+    fun orr() {
         println("===피자===")
         println("1.${PizzaA()}")
         println("2.${PizzaB()}")
         println("3.${PizzaC()}")
         println("0. 뒤로가기")
     }
+
     fun select(){
         println("셀렉트입니다. 번호를 고르세요")
         ordermenu()
@@ -165,4 +175,43 @@ class BurgerC: Ham() {
 
     }
 }*/
+
+open class Chicken : Food() {
+    /*var name =""
+    var price = 0
+    var material = ""*/
+
+    fun orr() {
+        println("===치킨===")
+        println("1.${ChickenA()}")
+        println("2.${ChickenB()}")
+        println("3.${ChickenC()}")
+        println("0. 뒤로가기")
+    }
+
+    fun select(){
+        println("셀렉트입니다. 번호를 고르세요")
+        ordermenu()
+    }
+
+    fun ChickenA(): String {
+        name = "chicken A"
+        price = 9000
+        material = "토마토, 체리 페퍼에 쉑소스가.."
+        return "$name | $price 원 | $material"
+    }
+    fun ChickenB(): String {
+        name = "chicken B"
+        price = 10000
+        material = "토마토,   체리 페퍼에 쉑소스가.."
+        return "$name| $price 원 | $material"
+    }
+    fun ChickenC(): String {
+        name = "chicken C"
+        price = 8000
+        material = "토마토,   체리 페퍼에 쉑소스가.."
+        return "$name| $price 원 | $material"
+    }
+
+}
 
