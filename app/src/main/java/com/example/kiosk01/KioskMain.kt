@@ -1,13 +1,8 @@
-package com.example.kiosk01
+package com.example.test01.KioskMain
 
 fun main() {
-    val order = Order()
-    order.menu()
-
-    val hamN = Burger()
-    val pizN = Pizza()
-    val chickN = Chicken()
-    val drinkN = Drink()
+    menu()
+    var list = init()
 
     while(true) {
         val num = readLine()!!.toInt()
@@ -19,10 +14,7 @@ fun main() {
         }
 
         when (num) {
-            1 -> hamN.detailmenu()
-            2 -> pizN.detailmenu()
-            3 -> chickN.detailmenu()
-            4 -> drinkN.detailmenu()
+            in 1..4 -> list[num-1].detailmenu()
             0 -> {
                 println("종료 합니다.처음페이지에서 종료")
                 System.exit(0) //종료
@@ -32,18 +24,27 @@ fun main() {
     }
 }
 
-//Order 클래스 : 처음 메뉴판
-class Order {
-    fun menu() {
-        println("===메뉴판===")
-        println("1. 햄버거")
-        println("2. 피자")
-        println("3. 치킨")
-        println("4. 음료")
-        println("0. 종료")
-        print("번호를 입력하세요: ")
-    }
+fun init(): Array<Food> {
+    val hamN = Burger()
+    val pizN = Pizza()
+    val chickN = Chicken()
+    val drinkN = Drink()
+    var initlist = arrayOf(hamN,pizN,chickN,drinkN)
+
+    return initlist
+
 }
+//처음 메뉴판
+fun menu() {
+    println("===메뉴판===")
+    println("1. 햄버거")
+    println("2. 피자")
+    println("3. 치킨")
+    println("4. 음료")
+    println("0. 종료")
+    print("번호를 입력하세요: ")
+}
+
 
 //상속하는 Food 클래스 : name,price, material/
 open class Food {
@@ -71,12 +72,15 @@ open class Food {
         println("상세 메뉴에서 고르세요")
         ordermenu()
     }
+    open fun detailmenu() {
+
+    }
 }
 
 
 //Food클래스한테 상속받은 Burger 클래스
 open class Burger : Food() {
-    fun detailmenu() {
+    override fun detailmenu() {
         println("===햄버거===")
         print("1.")
         BurgerA().burgerlist()
@@ -121,7 +125,7 @@ class BurgerC: Burger() {
 
 // Food 클래스한테 상속받은 Pizza 클래스
 open class Pizza : Food() {
-    fun detailmenu() {
+    override fun detailmenu() {
         println("===피자===")
         print("1.")
         PizzaA().displayInfo()
@@ -164,7 +168,7 @@ class PizzaC(): Pizza() {
 
 // Food 클래스한테 상속받은 Chicken 클래스
 open class Chicken : Food() {
-    fun detailmenu() {
+    override fun detailmenu() {
         println("===치킨===")
         print("1.")
         ChickenA().displayInfo()
@@ -207,7 +211,7 @@ class ChickenC(): Chicken() {
 
 // Food 클래스한테 상속받은 Drink 클래스
 open class Drink : Food() {
-    fun detailmenu() {
+    override fun detailmenu() {
         println("===음료===")
         print("1.")
         DrinkA().displayInfo()
