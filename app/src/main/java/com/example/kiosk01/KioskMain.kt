@@ -1,4 +1,4 @@
-package com.example.test01.KioskMain
+package com.example.KioskMain
 
 fun main() {
     menu()
