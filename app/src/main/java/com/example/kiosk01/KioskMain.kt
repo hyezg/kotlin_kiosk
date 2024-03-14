@@ -6,7 +6,7 @@ fun main() {
         while(true) {
             val num = readLine()!!.toInt()
 
-            //num이 0~3이 아니라면 메인으로 돌아감
+            //num이 0~4이 아니라면 메인으로 돌아감
             if (num !in 0..4) {
                 println("0~4까지 입력가능합니다.")
                 main()
@@ -20,25 +20,21 @@ fun main() {
             when (num) {
                 1 -> {
                     hamN.detailmenu()
-                    hamN.select()
                 }
 
                 2 -> {
                     pizN.detailmenu()
-                    pizN.select()
                 }
 
                 3 -> {
                     chickN.detailmenu()
-                    chickN.select()
                 }
                 4 -> {
                     drinkN.detailmenu()
-                    drinkN.select()
                 }
 
                 0 -> {
-                    println("종료 합니다.")
+                    println("종료 합니다.처음페이지에서 종료")
                     break
                 }
             }
@@ -76,6 +72,10 @@ open class Food {
             }
         }
     }
+    fun selectmenu() {
+        println("상세 메뉴에서 고르세요")
+        ordermenu()
+    }
 
     //기본 세팅 그냥 해봄
     /*fun hambuger(): String {
@@ -85,6 +85,7 @@ open class Food {
         return "$name, $price, $material"
     }*/
 }
+
 //Food클래스한테 상속받은 Burger 클래스
 open class Burger : Food() {
     fun detailmenu() {
@@ -94,12 +95,7 @@ open class Burger : Food() {
         println("2.${burgerB()}")
         println("3.${burgerC()}")
         println("0. 뒤로가기")
-    }
-
-    fun select(){
-        println("셀렉트입니다. 번호를 고르세요")
-        ordermenu()
-
+        selectmenu()
     }
 
     private fun burgerA(): String {
@@ -127,21 +123,13 @@ open class Burger : Food() {
 
 // Food 클래스한테 상속받은 Pizza 클래스
 open class Pizza : Food() {
-    /*var name =""
-    var price = 0
-    var material = ""*/
-
     fun detailmenu() {
         println("===피자===")
         println("1.${pizzaA()}")
         println("2.${pizzaB()}")
         println("3.${pizzaC()}")
         println("0. 뒤로가기")
-    }
-
-    fun select(){
-        println("==========셀렉트입니다. 번호를 고르세요")
-        ordermenu()
+        selectmenu()
     }
 
     fun pizzaA(): String {
@@ -165,45 +153,17 @@ open class Pizza : Food() {
 
 }
 
-/*class BurgerA : Ham() {
-    override fun burgerlist(name: String, price: Int, material: String) {
-        super.burgerlist("buger A", 9000, "토마토, 체리 페퍼에 쉑소스가..")
-
-    }
-}
-
-class BurgerB : Ham() {
-    override fun burgerlist(name: String, price: Int, material: String) {
-        super.burgerlist("buger b", 9000, "토마토, 체리 페퍼에 쉑소스가..")
-
-    }
-}
-
-class BurgerC: Ham() {
-    override fun burgerlist(name: String, price: Int, material: String) {
-        super.burgerlist("buger C", 9000, "토마토, 체리 페퍼에 쉑소스가..")
-
-    }
-}*/
-
 // Food 클래스한테 상속받은 Chicken 클래스
 open class Chicken : Food() {
-    /*var name =""
-    var price = 0
-    var material = ""*/
-
     fun detailmenu() {
         println("===치킨===")
         println("1.${chickenA()}")
         println("2.${chickenB()}")
         println("3.${chickenC()}")
         println("0. 뒤로가기")
+        selectmenu()
     }
 
-    fun select(){
-        println("치킨 중 선택하세요.")
-        ordermenu()
-    }
 
     fun chickenA(): String {
         name = "chicken A"
@@ -223,27 +183,19 @@ open class Chicken : Food() {
         material = "마늘이 들어간~"
         return "$name| $price 원 | $material"
     }
-
 }
 
 // Food 클래스한테 상속받은 Drink 클래스
 open class Drink : Food() {
-    /*var name =""
-    var price = 0
-    var material = ""*/
-
     fun detailmenu() {
         println("===음료===")
         println("1.${drinkA()}")
         println("2.${drinkB()}")
         println("3.${drinkC()}")
         println("0. 뒤로가기")
+        selectmenu()
     }
 
-    fun select(){
-        println("음료 중 선택하세요.")
-        ordermenu()
-    }
 
     fun drinkA(): String {
         name = "Drink A"
@@ -263,6 +215,27 @@ open class Drink : Food() {
         material = "마늘이 들어간~"
         return "$name| $price 원 | $material"
     }
-
 }
 
+
+/* 상세 메뉴 따로 클래스 만들어야하나?
+class BurgerA : Ham() {
+    override fun burgerlist(name: String, price: Int, material: String) {
+        super.burgerlist("buger A", 9000, "토마토, 체리 페퍼에 쉑소스가..")
+
+    }
+}
+
+class BurgerB : Ham() {
+    override fun burgerlist(name: String, price: Int, material: String) {
+        super.burgerlist("buger b", 9000, "토마토, 체리 페퍼에 쉑소스가..")
+
+    }
+}
+
+class BurgerC: Ham() {
+    override fun burgerlist(name: String, price: Int, material: String) {
+        super.burgerlist("buger C", 9000, "토마토, 체리 페퍼에 쉑소스가..")
+
+    }
+}*/
