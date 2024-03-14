@@ -18,28 +18,17 @@ fun main() {
             val drinkN = Drink()
 
             when (num) {
-                1 -> {
-                    hamN.detailmenu()
-                }
-
-                2 -> {
-                    pizN.detailmenu()
-                }
-
-                3 -> {
-                    chickN.detailmenu()
-                }
-                4 -> {
-                    drinkN.detailmenu()
-                }
-
+                1 -> hamN.detailmenu()
+                2 -> pizN.detailmenu()
+                3 -> chickN.detailmenu()
+                4 -> drinkN.detailmenu()
                 0 -> {
                     println("종료 합니다.처음페이지에서 종료")
+                    System.exit(0)
                     break
                 }
             }
         }
-
 }
 
 //Order 클래스 : 처음 메뉴판
@@ -57,6 +46,7 @@ class Order {
 
 //상속하는 Food 클래스 : name,price, material/
 open class Food {
+    //음식들 기본값?
     var name = ""
     var price = 0
     var material = ""
@@ -70,8 +60,12 @@ open class Food {
                 println("뒤로갑니다.")
                 main()
             }
+            else -> {
+                println("0~4까지 입력가능합니다.")
+            }
         }
     }
+
     fun selectmenu() {
         println("상세 메뉴에서 고르세요")
         ordermenu()
@@ -86,6 +80,7 @@ open class Food {
     }*/
 }
 
+
 //Food클래스한테 상속받은 Burger 클래스
 open class Burger : Food() {
     fun detailmenu() {
@@ -98,6 +93,8 @@ open class Burger : Food() {
         selectmenu()
     }
 
+
+    //다른것들도 다 private 해야할까?
     private fun burgerA(): String {
         name = "burger A"
         price = 9000
