@@ -1,35 +1,40 @@
 package com.example.kiosk01
 fun main() {
-        val or = Order()
-        or.menu()
+        val order = Order()
+        order.menu()
 
         while(true) {
             val num = readLine()!!.toInt()
 
-            if (num !in 0..3) {
-                println("0~3까지 입력가능합니다.")
+            //num이 0~3이 아니라면 메인으로 돌아감
+            if (num !in 0..4) {
+                println("0~4까지 입력가능합니다.")
                 main()
             }
 
-            val hamN = Ham()
-            val pizN = Piz()
+            val hamN = Burger()
+            val pizN = Pizza()
             val chickN = Chicken()
-
+            val drinkN = Drink()
 
             when (num) {
                 1 -> {
-                    hamN.orr()
+                    hamN.detailmenu()
                     hamN.select()
                 }
 
                 2 -> {
-                    pizN.orr()
+                    pizN.detailmenu()
                     pizN.select()
                 }
 
                 3 -> {
-                    chickN.orr()
+                    chickN.detailmenu()
                     chickN.select()
+                }
+                4 -> {
+                    drinkN.detailmenu()
+                    drinkN.select()
                 }
 
                 0 -> {
@@ -40,48 +45,54 @@ fun main() {
         }
 
 }
+
+//Order 클래스 : 처음 메뉴판
 class Order {
     fun menu() {
         println("===메뉴판===")
         println("1. 햄버거")
         println("2. 피자")
         println("3. 치킨")
+        println("4. 음료")
         println("0. 종료")
         print("번호를 입력하세요: ")
     }
 }
 
+//상속하는 Food 클래스 : name,price, material/
 open class Food {
-    var name =""
+    var name = ""
     var price = 0
     var material = ""
 
+    //상세메뉴판에서 상세 메뉴 고르기. 일단 1,2,3하면 메인화면으로 돌아감
     fun ordermenu() {
         val num2 = readln().toInt()
         when (num2) {
-            1,2,3 -> main()
+            1, 2, 3 -> main()
             0 -> {
-                println("뒤로가기입니다.")
+                println("뒤로갑니다.")
                 main()
             }
         }
     }
 
-    fun hambuger(): String {
+    //기본 세팅 그냥 해봄
+    /*fun hambuger(): String {
         name = "햄버거"
         price = 100000
         material = "기본 재료"
         return "$name, $price, $material"
-    }
+    }*/
 }
-open class Ham : Food() {
-
-    fun orr() {
+//Food클래스한테 상속받은 Burger 클래스
+open class Burger : Food() {
+    fun detailmenu() {
         println("===햄버거===")
-        println("1.${BurgerA()}")
-        println("2.${BurgerB()}")
-        println("3.${BurgerC()}")
-        println("가장 기본은 ${hambuger()}")
+        //println("가장 기본은 ${hambuger()}")
+        println("1.${burgerA()}")
+        println("2.${burgerB()}")
+        println("3.${burgerC()}")
         println("0. 뒤로가기")
     }
 
@@ -91,23 +102,22 @@ open class Ham : Food() {
 
     }
 
-
-    fun BurgerA(): String {
+    private fun burgerA(): String {
         name = "burger A"
         price = 9000
-        material = "토마토, 체리 페퍼에 쉑소스가.."
+        material = "토마토, 양상추"
         return "$name | $price 원 | $material"
     }
-    fun BurgerB(): String {
+    fun burgerB(): String {
         name = "burger B"
         price = 10000
-        material = "토마토,   체리 페퍼에 쉑소스가.."
+        material = "베이컨, 치즈"
         return "$name| $price 원 | $material"
     }
-    fun BurgerC(): String {
+    fun burgerC(): String {
         name = "burger C"
         price = 8000
-        material = "토마토,   체리 페퍼에 쉑소스가.."
+        material = "체다치즈"
         return "$name| $price 원 | $material"
     }
     /*open fun burgerlist(name:String, price:Int, material:String) {
@@ -115,41 +125,41 @@ open class Ham : Food() {
     }*/
 }
 
-
-open class Piz : Food() {
+// Food 클래스한테 상속받은 Pizza 클래스
+open class Pizza : Food() {
     /*var name =""
     var price = 0
     var material = ""*/
 
-    fun orr() {
+    fun detailmenu() {
         println("===피자===")
-        println("1.${PizzaA()}")
-        println("2.${PizzaB()}")
-        println("3.${PizzaC()}")
+        println("1.${pizzaA()}")
+        println("2.${pizzaB()}")
+        println("3.${pizzaC()}")
         println("0. 뒤로가기")
     }
 
     fun select(){
-        println("셀렉트입니다. 번호를 고르세요")
+        println("==========셀렉트입니다. 번호를 고르세요")
         ordermenu()
     }
 
-    fun PizzaA(): String {
-        name = "pizz A"
-        price = 9000
-        material = "토마토, 체리 페퍼에 쉑소스가.."
+    fun pizzaA(): String {
+        name = "pizza A"
+        price = 15000
+        material = "고구마가 들어간"
         return "$name | $price 원 | $material"
     }
-    fun PizzaB(): String {
+    fun pizzaB(): String {
         name = "pizza B"
         price = 10000
-        material = "토마토,   체리 페퍼에 쉑소스가.."
+        material = "페퍼로니가 들어간"
         return "$name| $price 원 | $material"
     }
-    fun PizzaC(): String {
+    fun pizzaC(): String {
         name = "pizza C"
-        price = 8000
-        material = "토마토,   체리 페퍼에 쉑소스가.."
+        price = 20000
+        material = "고기가 들어간"
         return "$name| $price 원 | $material"
     }
 
@@ -176,40 +186,81 @@ class BurgerC: Ham() {
     }
 }*/
 
+// Food 클래스한테 상속받은 Chicken 클래스
 open class Chicken : Food() {
     /*var name =""
     var price = 0
     var material = ""*/
 
-    fun orr() {
+    fun detailmenu() {
         println("===치킨===")
-        println("1.${ChickenA()}")
-        println("2.${ChickenB()}")
-        println("3.${ChickenC()}")
+        println("1.${chickenA()}")
+        println("2.${chickenB()}")
+        println("3.${chickenC()}")
         println("0. 뒤로가기")
     }
 
     fun select(){
-        println("셀렉트입니다. 번호를 고르세요")
+        println("치킨 중 선택하세요.")
         ordermenu()
     }
 
-    fun ChickenA(): String {
+    fun chickenA(): String {
         name = "chicken A"
-        price = 9000
-        material = "토마토, 체리 페퍼에 쉑소스가.."
+        price = 18000
+        material = "매운 양념이 들어간"
         return "$name | $price 원 | $material"
     }
-    fun ChickenB(): String {
+    fun chickenB(): String {
         name = "chicken B"
-        price = 10000
-        material = "토마토,   체리 페퍼에 쉑소스가.."
+        price = 19000
+        material = "치즈 가루가 들어간"
         return "$name| $price 원 | $material"
     }
-    fun ChickenC(): String {
+    fun chickenC(): String {
         name = "chicken C"
-        price = 8000
-        material = "토마토,   체리 페퍼에 쉑소스가.."
+        price = 20000
+        material = "마늘이 들어간~"
+        return "$name| $price 원 | $material"
+    }
+
+}
+
+// Food 클래스한테 상속받은 Drink 클래스
+open class Drink : Food() {
+    /*var name =""
+    var price = 0
+    var material = ""*/
+
+    fun detailmenu() {
+        println("===음료===")
+        println("1.${drinkA()}")
+        println("2.${drinkB()}")
+        println("3.${drinkC()}")
+        println("0. 뒤로가기")
+    }
+
+    fun select(){
+        println("음료 중 선택하세요.")
+        ordermenu()
+    }
+
+    fun drinkA(): String {
+        name = "Drink A"
+        price = 3000
+        material = "자몽 에이드"
+        return "$name | $price 원 | $material"
+    }
+    fun drinkB(): String {
+        name = "Drink B"
+        price = 6000
+        material = "치즈 가루가 들어간"
+        return "$name| $price 원 | $material"
+    }
+    fun drinkC(): String {
+        name = "Drink C"
+        price = 4500
+        material = "마늘이 들어간~"
         return "$name| $price 원 | $material"
     }
 
