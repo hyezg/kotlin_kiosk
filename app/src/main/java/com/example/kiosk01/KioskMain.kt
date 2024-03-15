@@ -1,10 +1,10 @@
-package com.example.KioskMain
+package com.example.kiosk01
 
 fun main() {
     menu()
-    var list = init()
+    val list = init()
 
-    while(true) {
+    while (true) {
         val num = readLine()!!.toInt()
 
         //num이 0~4이 아니라면 메인으로 돌아감
@@ -14,7 +14,7 @@ fun main() {
         }
 
         when (num) {
-            in 1..4 -> list[num-1].detailmenu()
+            in 1..4 -> list[num - 1].detailmenu()
             0 -> {
                 println("종료 합니다.처음페이지에서 종료")
                 System.exit(0) //종료
@@ -29,11 +29,12 @@ fun init(): Array<Food> {
     val pizN = Pizza()
     val chickN = Chicken()
     val drinkN = Drink()
-    var initlist = arrayOf(hamN,pizN,chickN,drinkN)
+    val initlist = arrayOf(hamN, pizN, chickN, drinkN)
 
     return initlist
 
 }
+
 //처음 메뉴판
 fun menu() {
     println("===메뉴판===")
@@ -46,9 +47,9 @@ fun menu() {
 }
 
 
-//상속하는 Food 클래스 : name,price, material/
+//상속하는 Food 클래스 : name,price, material
 open class Food {
-    //음식들 기본값?
+    //선언 및 초기화
     var name = ""
     var price = 0
     var material = ""
@@ -62,6 +63,7 @@ open class Food {
                 println("뒤로갑니다.")
                 main()
             }
+
             else -> {
                 println("0~4까지 입력가능합니다.")
             }
@@ -72,8 +74,12 @@ open class Food {
         println("상세 메뉴에서 고르세요")
         ordermenu()
     }
-    open fun detailmenu() {
 
+    open fun detailmenu() {
+    }
+
+    open fun displayInfo() {
+        println("$name | $price | $material")
     }
 }
 
@@ -83,43 +89,41 @@ open class Burger : Food() {
     override fun detailmenu() {
         println("===햄버거===")
         print("1.")
-        BurgerA().burgerlist()
+        BurgerA().displayInfo()
         print("2.")
-        BurgerB().burgerlist()
+        BurgerB().displayInfo()
         print("3.")
-        BurgerC().burgerlist()
+        BurgerC().displayInfo()
         println("0. 뒤로가기")
         selectmenu()
     }
-
-    open fun burgerlist() {
-        println("$name | $price | $material")
-    }
 }
 
-//상세 메뉴 따로 클래스 만들어야하나?
+
 class BurgerA : Burger() {
-    override fun burgerlist() {
-        name = "burger a"
+    override fun displayInfo() {
+        name = "Burger a"
         price = 10000
-        material = "버거 에이 "
-        super.burgerlist()
+        material = "양상추, 치즈가 들어간 "
+        super.displayInfo()
     }
 }
+
 class BurgerB : Burger() {
-    override fun burgerlist() {
-        name = "burger b"
-        price = 20000
-        material = "버거 비~"
-        super.burgerlist()
+    override fun displayInfo() {
+        name = "Burger b"
+        price = 8500
+        material = "치킨패티가 들어간"
+        super.displayInfo()
     }
 }
-class BurgerC: Burger() {
-    override fun burgerlist() {
-        name = "burger c"
-        price = 18000
-        material = "버거 c~"
-        super.burgerlist()
+
+class BurgerC : Burger() {
+    override fun displayInfo() {
+        name = "Burger c"
+        price = 96000
+        material = "버섯이 들어간"
+        super.displayInfo()
     }
 }
 
@@ -136,32 +140,32 @@ open class Pizza : Food() {
         println("0. 뒤로가기")
         selectmenu()
     }
-    open fun displayInfo() {
-        println("$name | $price | $material")
+}
+
+class PizzaA() : Pizza() {
+
+    override fun displayInfo() {
+        name = "Pizza A"
+        price = 15000
+        material = "고구마가 들어간"
+        super.displayInfo()
     }
 }
 
-class PizzaA(): Pizza() {
+class PizzaB() : Pizza() {
     override fun displayInfo() {
-        name = "pizza A"
-        price = 15000
-        material = "고구마가 들어간"
+        name = "Pizza B"
+        price = 19000
+        material = "불고기가 들어간"
         super.displayInfo()
     }
 }
-class PizzaB(): Pizza() {
+
+class PizzaC() : Pizza() {
     override fun displayInfo() {
-        name = "pizza B"
-        price = 15000
-        material = "고구마가 들어간"
-        super.displayInfo()
-    }
-}
-class PizzaC(): Pizza() {
-    override fun displayInfo() {
-        name = "pizza C"
-        price = 15000
-        material = "고구마가 들어간"
+        name = "Pizza C"
+        price = 17000
+        material = "새우가 들어간"
         super.displayInfo()
     }
 }
@@ -179,32 +183,31 @@ open class Chicken : Food() {
         println("0. 뒤로가기")
         selectmenu()
     }
-    open fun displayInfo() {
-        println("$name | $price | $material")
+}
+
+class ChickenA() : Chicken() {
+    override fun displayInfo() {
+        name = "Chicken A"
+        price = 17000
+        material = "후라이드"
+        super.displayInfo()
     }
 }
 
-class ChickenA(): Chicken() {
+class ChickenB() : Chicken() {
     override fun displayInfo() {
-        name = "chicken A"
-        price = 15000
-        material = "고구마가 들어간"
+        name = "Chicken B"
+        price = 18000
+        material = "양념"
         super.displayInfo()
     }
 }
-class ChickenB(): Chicken() {
+
+class ChickenC() : Chicken() {
     override fun displayInfo() {
-        name = "chicken B"
-        price = 15000
-        material = "고구마가 들어간"
-        super.displayInfo()
-    }
-}
-class ChickenC(): Chicken() {
-    override fun displayInfo() {
-        name = "chicken C"
-        price = 15000
-        material = "고구마가 들어간"
+        name = "Chicken C"
+        price = 19000
+        material = "매운 양념"
         super.displayInfo()
     }
 }
@@ -222,12 +225,9 @@ open class Drink : Food() {
         println("0. 뒤로가기")
         selectmenu()
     }
-    open fun displayInfo() {
-        println("$name | $price | $material")
-    }
 }
 
-class DrinkA(): Chicken() {
+class DrinkA() : Chicken() {
     override fun displayInfo() {
         name = "Drink A"
         price = 15000
@@ -235,7 +235,8 @@ class DrinkA(): Chicken() {
         super.displayInfo()
     }
 }
-class DrinkB(): Chicken() {
+
+class DrinkB() : Chicken() {
     override fun displayInfo() {
         name = "Drink B"
         price = 15000
@@ -243,7 +244,8 @@ class DrinkB(): Chicken() {
         super.displayInfo()
     }
 }
-class DrinkC(): Chicken() {
+
+class DrinkC() : Chicken() {
     override fun displayInfo() {
         name = "Drink C"
         price = 15000
